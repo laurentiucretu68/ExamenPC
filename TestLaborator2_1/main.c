@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <math.h>
 
+///Definirea structurii produs
 struct produs{
     char nume[30];
     float pret;
@@ -11,17 +12,21 @@ struct produs{
     struct locatie *L;
 };
 
+///Definirea structurii locatie
 struct locatie{
     char *nume_sector;
     char gps_x;
     char gps_y;
 };
 
+///Definirea unui nod al listei
 struct nod{
     struct produs prod;
     struct nod* urm;
 };
 
+///Adaugarea elementelor vectorului de produse in lista simplu inlantuita
+///Adaugarea elementelor se realizeaza la finalul listei
 void adaugareElementeLista(struct nod **cap,struct produs p){
     if ((*cap)==NULL){
         struct nod *nou = (struct nod*)malloc(sizeof(struct nod));
@@ -39,6 +44,7 @@ void adaugareElementeLista(struct nod **cap,struct produs p){
     curent->urm = nou;
 }
 
+///Functie care afiseaza elementele din lista
 void afisareElementeLista(struct nod *cap){
     while (cap!=NULL){
         printf("%s %.2f %.2f ",cap->prod.nume,cap->prod.pret,cap->prod.distanta_maxima);
@@ -49,17 +55,18 @@ void afisareElementeLista(struct nod *cap){
     }
 }
 
+///Functie de citire a produselor din fisier
 void citire(struct produs **p,int *nrProduse,FILE* fin){
     *nrProduse = 0;
     *p =(struct produs*)malloc(sizeof(struct produs));
     char line[300];
-    while (fgets(line,300,fin)){
+    while (fgets(line,300,fin)){ ///Citirea se realizeaza la nivel de linie de fisier
         *p = realloc(*p,((*nrProduse)+1)*sizeof(struct produs));
-        char *sep = strtok(line," ,");
-        strcpy((*p)[*nrProduse].nume,sep); sep = strtok(NULL," ,");
-        (*p)[*nrProduse].pret = atof(sep); sep = strtok(NULL," ,");
+        char *sep = strtok(line," ,"); ///Se sparge linia in campurile unui produs cu functia strtok
+        strcpy((*p)[*nrProduse].nume,sep); sep = strtok(NULL," ,"); ///Memorarea numelui
+        (*p)[*nrProduse].pret = atof(sep); sep = strtok(NULL," ,"); ///Memorarea pretului
         (*p)[*nrProduse].L = (struct locatie*)malloc(sizeof(struct locatie));
-        int contor_locatii = 0;
+        int contor_locatii = 0; ///Retine numarul de locatii pentru fiecare produs
         while (sep){
             (*p)[*nrProduse].L = realloc((*p)[*nrProduse].L,(contor_locatii+1)*sizeof(struct locatie));
             (*p)[*nrProduse].L[contor_locatii].nume_sector = (char*)malloc(30*sizeof(char));
@@ -73,6 +80,7 @@ void citire(struct produs **p,int *nrProduse,FILE* fin){
     }
 }
 
+///Functie ce afiseaza produsele din vector
 void afisare(struct produs *p,int nrProduse){
     for (int i=0; i<nrProduse; i++){
         printf("%s %.2f %.2f ",p[i].nume,p[i].pret,p[i].distanta_maxima);
@@ -82,6 +90,7 @@ void afisare(struct produs *p,int nrProduse){
     }
 }
 
+///Functie ce determina distanta maxima intre doua localitati ale unui produs
 void distantaMaxima(struct produs **p,int nrProduse){
     for (int i=0; i<nrProduse; i++){
         float distanta_maxima = 0;
@@ -95,17 +104,7 @@ void distantaMaxima(struct produs **p,int nrProduse){
     }
 }
 
-int comp(const void *a,const void *b){
-    struct locatie l1 = *((struct locatie*)a);
-    struct locatie l2 = *((struct locatie*)b);
-
-    if (strcmp(l1.nume_sector,l2.nume_sector)>0)
-        return 1;
-    if (strcmp(l1.nume_sector,l2.nume_sector)==0)
-        return 0;
-    return -1;
-}
-
+///Returneaza numarul de locatii duplicat pentru un produs
 int numarDuplicate(struct produs prod){
     int duplicate=0;
     for (int i=0; i<prod.nr_locatii-1; i++)
@@ -117,6 +116,7 @@ int numarDuplicate(struct produs prod){
     return duplicate;
 }
 
+///Functie comparatoare pentru functia qsort
 int cmp(const void *a,const void *b){
     struct produs p1 = *((struct produs*)a);
     struct produs p2 = *((struct produs*)b);
@@ -131,10 +131,12 @@ int cmp(const void *a,const void *b){
     return -1;
 }
 
+///Functia de sortare
 void sortare(struct produs **p,int nrProduse){
     qsort(*p,nrProduse,sizeof(struct produs),cmp);
 }
 
+///Functie de adaugare noduri in lista - subpunctul 4
 void adaugare(struct nod *lista, char* nume_produs, struct produs p){
     struct nod *curent = lista;
     while (curent!=NULL){
@@ -153,11 +155,13 @@ int main() {
     struct produs *p;
     int nrProduse;
     struct nod *cap = NULL;
-    FILE* fin = fopen("C:\\Users\\asus\\Desktop\\Facultate\\Programarea Calculatoarelor\\Sesiune\\TestLaborator2_1\\produse.txt","r");
+    FILE* fin = fopen("produse.txt","r");
     citire(&p,&nrProduse,fin);
     distantaMaxima(&p,nrProduse);
     sortare(&p,nrProduse);
     afisare(p,nrProduse);
+
+    ///Adauga elementele in lista
     for (int i=0; i<nrProduse; i++)
         adaugareElementeLista(&cap,p[i]);
     printf("\n\nLista:\n");
