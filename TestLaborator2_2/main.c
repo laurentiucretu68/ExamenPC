@@ -137,7 +137,7 @@ int main() {
     int nrProduse;
     struct produs *p;
     struct nod *cap = NULL;
-    FILE* fin = fopen("C:\\Users\\asus\\Desktop\\Facultate\\Programarea Calculatoarelor\\Sesiune\\TestLaborator2_2\\produse.txt","r");
+    FILE* fin = fopen("produse.txt","r");
     citire(&p,&nrProduse,fin);
     printf("\n%s ",locatie("Mouse",43,65,p,nrProduse));
     sortare(&p,nrProduse);
