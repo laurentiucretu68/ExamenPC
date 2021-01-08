@@ -1,0 +1,4 @@
+Inghetata 5 Lidl 30 65 Auchan 54 21
+Mouse 47.89 Altex 90 21 Flanco 12 56 Domo 85 32
+Carne 15 Lidl 95 65 Auchan 54 71 Kaufland 43 21
+Tastatura 5 Altex 43 56 eMag 70 91 Flanco 12 56
