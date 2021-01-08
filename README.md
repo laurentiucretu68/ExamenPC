@@ -1,2 +1,2 @@
 # ExamenPC
-Modele teste de laborator nr 2 PC
+Modele testul 2 de laborator PC - Cretu Laurentiu, CTI, G161 - 2021
