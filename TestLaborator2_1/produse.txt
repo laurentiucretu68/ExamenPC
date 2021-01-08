@@ -1,0 +1,4 @@
+NvidiaGTX, 320, Placi_video, 42, 10, Electronice, 11, 24
+Mouse, 15, Accesorii, 1, 22, Piese, 44, 62, Accesorii, 24, 66
+Tastatura, 50, Accesorii, 54, 90, Piese, 44, 62
+Microfon, 75.99, Electronice, 89, 12, Piese, 12 6, Piese, 1 43
