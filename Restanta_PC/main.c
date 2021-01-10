@@ -99,8 +99,8 @@ int main(){
     int n;
     struct lista_vechituri **matrice;
     struct destinatar *studenti;
-    FILE* fin = fopen("C:\\Users\\asus\\Desktop\\Facultate\\Programarea Calculatoarelor\\Sesiune\\Restanta_PC\\studenti.txt","r");
-    FILE* fout = fopen("C:\\Users\\asus\\Desktop\\Facultate\\Programarea Calculatoarelor\\Sesiune\\Restanta_PC\\studenti.out","w");
+    FILE* fin = fopen("studenti.txt","r");
+    FILE* fout = fopen("studenti.out","w");
     citire(&matrice,&studenti,&n,fin);
     char *telegrama;
     telegrama = (char*)malloc(100*sizeof(char));
