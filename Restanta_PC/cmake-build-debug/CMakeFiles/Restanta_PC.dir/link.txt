@@ -1,0 +1,3 @@
+"D:\JetBrains\CLion 2020.2.1\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\Restanta_PC.dir/objects.a
+C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\ar.exe cr CMakeFiles\Restanta_PC.dir/objects.a @CMakeFiles\Restanta_PC.dir\objects1.rsp
+C:\PROGRA~1\MINGW-~1\X86_64~1.0-P\mingw64\bin\gcc.exe -g   -Wl,--whole-archive CMakeFiles\Restanta_PC.dir/objects.a -Wl,--no-whole-archive  -o Restanta_PC.exe -Wl,--out-implib,libRestanta_PC.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\Restanta_PC.dir\linklibs.rsp
